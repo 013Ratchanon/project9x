@@ -1,15 +1,84 @@
-img {
-  border-radius: 15px;
+/* สไตล์สำหรับปุ่ม "Add to Cart" */
+.add-to-cart {
+  background-color: #561c24;
+  /* สีแดงเข้มที่เหมือนกันกับโทนของเว็บไซต์ */
+  color: rgb(254, 199, 199);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+.add-to-cart:hover {
+  background-color: #d8c1b0;
+  /* สีอ่อนกว่าตอน hover */
+}
+
+/* สไตล์สำหรับ select (ปุ่มเลือกระดับความหวาน) */
+.sweetness-container {
+  margin-bottom: 15px;
+}
+
+.sweetness-container label {
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #561c24;
+  /* ใช้โทนสีเดียวกับเว็บไซต์ */
+}
+
+.sweetness-level {
+  width: 120px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 2px solid #d8d6d6;
+  /* สีขอบเดียวกับการตกแต่ง */
+  border-radius: 5px;
+  background-color: #feece2;
+  /* สีพื้นหลังที่เหมือนกันกับผลิตภัณฑ์ */
+  color: #561c24;
+  /* ใช้สีเดียวกับ label */
+  transition: all 0.3s ease;
+}
+
+.sweetness-level:hover {
+  border-color: #fac6ab;
+  /* เปลี่ยนสีขอบตอน hover */
+  background-color: #f6e2d7;
+  /* พื้นหลังอ่อนขึ้น */
+}
+
+.sweetness-level:focus {
+  outline: none;
+  border-color: #561c24;
+  /* ขอบสีเข้มเมื่อโฟกัส */
+  background-color: #f6e2d7;
+}
+
+/* สไตล์สำหรับการเลือกตัวเลือกใน select */
+.sweetness-level option {
+  font-size: 14px;
+  padding: 10px;
+  background-color: #feece2;
+  color: #561c24;
+}
+
+.sweetness-level option:hover {
+  background-color: #feece2;
+}
+
+/* สไตล์สำหรับสินค้า */
 .product {
   background-color: #feece2;
-  border: 1px solid #dddddd;
+  border: 1px solid #f5ecec;
   padding: 15px;
   margin: 10px;
   margin-bottom: 20px;
   border-radius: 15px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
 .product img,
@@ -19,32 +88,12 @@ img {
   margin: 0 auto;
 }
 
-.product {
-  cursor: pointer;
-  background-color: #feece2; /* White background */
-  border: 1px solid #f5ecec; /* Light gray border */
-  padding: 15px; /* Add some padding for spacing */
-  margin: 10px;
-  margin-bottom: 20px; /* Add margin to separate products */
-  border-radius: 15px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
-}
-
-/* Add border-radius and transition to product image */
-.product img {
-  border: 3px solid #d8d6d6;
-  border-radius: 15px;
-  transition: transform 0.3s ease; /* Add transition for smooth effect */
-}
-
-/* Change box-shadow and image transform on hover */
 .product:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Slightly stronger box-shadow on hover */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .product:hover img {
-  transform: scale(1.1); /* Scale up the image on hover */
+  transform: scale(1.1);
 }
 
 .product h5 {
@@ -55,7 +104,6 @@ header nav {
   height: 15vh;
   width: 80%;
   margin: 0 auto;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,13 +127,10 @@ header a {
   display: block;
   color: #561c24;
   text-decoration: none;
-
   border-radius: 0.2rem;
   padding: 0.5rem 1rem;
-
   transition: 0.2s ease-in;
-  border-bottom: 2px solid var(--blue);
-
+  border-bottom: 2px solid #feece2;
   overflow: hidden;
   position: relative;
 }
@@ -95,15 +140,13 @@ header a::before {
   position: absolute;
   left: 0;
   top: 0;
-
   width: 100%;
   height: 100%;
   border-radius: 0.1rem;
   z-index: -1;
-
   transition: 0.2s ease-in;
   transform: translateX(-101%);
-  background: var(--blue);
+  background: #fac6ab;
 }
 
 header a:hover::before {
@@ -111,5 +154,5 @@ header a:hover::before {
 }
 
 header a:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(255, 209, 209);
 }

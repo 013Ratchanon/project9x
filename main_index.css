@@ -13,7 +13,7 @@
 }
 
 body {
-  background: var(--bg);
+  background: #feece2;
   color: white;
 }
 
@@ -162,18 +162,29 @@ img {
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
 }
 
+.buttons button,
+.buttons a {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff7f50;
+  /* สีส้มสดใส */
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .buttons button:hover,
 .buttons a:hover {
   transform: scale(1.1);
-}
-
-.buttons a {
-  text-decoration: none;
-  background-color: var(--blue);
-}
-
-.buttons button:hover {
-  background-color: var(--blue);
+  background-color: #ff4500;
+  /* สีเข้มขึ้นเมื่อ hover */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsivness  */
