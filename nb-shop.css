@@ -1,84 +1,86 @@
+/* สีพื้นหลังของเว็บไซต์ */
+body {
+  background-color: #f7f1f1; /* สีเบรดอ่อนสำหรับพื้นหลัง */
+  font-family: "Arial", sans-serif;
+  color: #561c24; /* สีข้อความหลัก */
+  margin: 0;
+  padding: 0;
+}
+
 /* สไตล์สำหรับปุ่ม "Add to Cart" */
 .add-to-cart {
-  background-color: #561c24;
-  /* สีแดงเข้มที่เหมือนกันกับโทนของเว็บไซต์ */
-  color: rgb(254, 199, 199);
-  padding: 10px 20px;
+  background-color: #f8d7da; /* สีเบรดอ่อน */
+  color: #561c24; /* สีแดงเข้ม */
+  padding: 12px 25px;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .add-to-cart:hover {
-  background-color: #d8c1b0;
-  /* สีอ่อนกว่าตอน hover */
+  background-color: #f1b0b7; /* สีชมพูอ่อนๆ */
+  transform: scale(1.05);
 }
 
 /* สไตล์สำหรับ select (ปุ่มเลือกระดับความหวาน) */
 .sweetness-container {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .sweetness-container label {
   font-weight: bold;
-  margin-right: 10px;
-  font-size: 14px;
+  margin-right: 12px;
+  font-size: 16px;
   color: #561c24;
-  /* ใช้โทนสีเดียวกับเว็บไซต์ */
 }
 
 .sweetness-level {
-  width: 120px;
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 2px solid #d8d6d6;
-  /* สีขอบเดียวกับการตกแต่ง */
+  width: 130px;
+  padding: 10px 15px;
+  font-size: 15px;
+  border: 2px solid #f0c1c1; /* ขอบสีเบรดอ่อน */
   border-radius: 5px;
-  background-color: #feece2;
-  /* สีพื้นหลังที่เหมือนกันกับผลิตภัณฑ์ */
+  background-color: #fff2f2; /* พื้นหลังสีเบรดอ่อน */
   color: #561c24;
-  /* ใช้สีเดียวกับ label */
   transition: all 0.3s ease;
 }
 
 .sweetness-level:hover {
-  border-color: #fac6ab;
-  /* เปลี่ยนสีขอบตอน hover */
-  background-color: #f6e2d7;
-  /* พื้นหลังอ่อนขึ้น */
+  border-color: #f8b8b8;
+  background-color: #f9d1d1;
 }
 
 .sweetness-level:focus {
   outline: none;
   border-color: #561c24;
-  /* ขอบสีเข้มเมื่อโฟกัส */
-  background-color: #f6e2d7;
+  background-color: #f9d1d1;
 }
 
 /* สไตล์สำหรับการเลือกตัวเลือกใน select */
 .sweetness-level option {
   font-size: 14px;
   padding: 10px;
-  background-color: #feece2;
+  background-color: #fff2f2;
   color: #561c24;
 }
 
 .sweetness-level option:hover {
-  background-color: #feece2;
+  background-color: #f8d7da;
 }
 
 /* สไตล์สำหรับสินค้า */
 .product {
-  background-color: #feece2;
+  background-color: #fff2f2; /* พื้นหลังสีเบรดอ่อน */
   border: 1px solid #f5ecec;
-  padding: 15px;
-  margin: 10px;
-  margin-bottom: 20px;
+  padding: 18px;
+  margin: 15px;
+  margin-bottom: 25px;
   border-radius: 15px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .product img,
@@ -90,6 +92,7 @@
 
 .product:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
 }
 
 .product:hover img {
@@ -97,9 +100,12 @@
 }
 
 .product h5 {
-  margin-top: 5px;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #561c24;
 }
 
+/* สไตล์สำหรับ header */
 header nav {
   height: 15vh;
   width: 80%;
@@ -110,7 +116,7 @@ header nav {
 }
 
 header h1 {
-  font-size: 45px;
+  font-size: 48px;
   color: #561c24;
   font-weight: 800;
   text-transform: uppercase;
@@ -119,7 +125,7 @@ header h1 {
 
 header ul {
   display: flex;
-  gap: 5rem;
+  gap: 4rem;
   list-style: none;
 }
 
@@ -128,8 +134,8 @@ header a {
   color: #561c24;
   text-decoration: none;
   border-radius: 0.2rem;
-  padding: 0.5rem 1rem;
-  transition: 0.2s ease-in;
+  padding: 0.7rem 1.5rem;
+  transition: 0.3s ease-in-out;
   border-bottom: 2px solid #feece2;
   overflow: hidden;
   position: relative;
@@ -144,9 +150,9 @@ header a::before {
   height: 100%;
   border-radius: 0.1rem;
   z-index: -1;
-  transition: 0.2s ease-in;
+  transition: 0.3s ease-in-out;
   transform: translateX(-101%);
-  background: #fac6ab;
+  background: #f8c6c3; /* สีเบรดอ่อน */
 }
 
 header a:hover::before {

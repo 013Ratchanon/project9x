@@ -13,9 +13,17 @@ document.querySelectorAll(".add-to-cart").forEach((button) => {
     const sweetnessLevel = button.previousElementSibling.value; // เลือกระดับความหวานจาก select
 
     if (!cart[productId]) {
-      cart[productId] = { quantity: 1, price: price, sweetnessLevel: sweetnessLevel };
+      cart[productId] = {};
+    }
+
+    if (!cart[productId][sweetnessLevel]) {
+      cart[productId][sweetnessLevel] = {
+        quantity: 1,
+        price: price,
+        sweetnessLevel: sweetnessLevel,
+      };
     } else {
-      cart[productId].quantity++;
+      cart[productId][sweetnessLevel].quantity++;
     }
 
     updateCartDisplay();
@@ -36,7 +44,14 @@ function updateCartDisplay() {
   // Create table header
   const thead = document.createElement("thead");
   const headerRow = document.createElement("tr");
-  const headers = ["Product", "Quantity", "Price", "Sweetness", "Total", "Actions"];
+  const headers = [
+    "Product",
+    "Sweetness",
+    "Quantity",
+    "Price",
+    "Total",
+    "Actions",
+  ];
   headers.forEach((headerText) => {
     const th = document.createElement("th");
     th.textContent = headerText;
@@ -49,45 +64,51 @@ function updateCartDisplay() {
   const tbody = document.createElement("tbody");
 
   for (const productId in cart) {
-    const item = cart[productId];
-    const itemTotalPrice = item.quantity * item.price;
-    totalPrice += itemTotalPrice;
+    for (const sweetnessLevel in cart[productId]) {
+      const item = cart[productId][sweetnessLevel];
+      const itemTotalPrice = item.quantity * item.price;
+      totalPrice += itemTotalPrice;
 
-    const tr = document.createElement("tr");
+      const tr = document.createElement("tr");
 
-    const productNameCell = document.createElement("td");
-    productNameCell.textContent = `${productId}`;
-    tr.appendChild(productNameCell);
+      const productNameCell = document.createElement("td");
+      productNameCell.textContent = `${productId}`;
+      tr.appendChild(productNameCell);
 
-    const quantityCell = document.createElement("td");
-    quantityCell.textContent = item.quantity;
-    tr.appendChild(quantityCell);
+      const sweetnessCell = document.createElement("td");
+      sweetnessCell.textContent = item.sweetnessLevel; // แสดงระดับความหวาน
+      tr.appendChild(sweetnessCell);
 
-    const priceCell = document.createElement("td");
-    priceCell.textContent = `$${item.price}`;
-    tr.appendChild(priceCell);
+      const quantityCell = document.createElement("td");
+      quantityCell.textContent = item.quantity;
+      tr.appendChild(quantityCell);
 
-    const sweetnessCell = document.createElement("td");
-    sweetnessCell.textContent = item.sweetnessLevel; // แสดงระดับความหวาน
-    tr.appendChild(sweetnessCell);
+      const priceCell = document.createElement("td");
+      priceCell.textContent = `$${item.price}`;
+      tr.appendChild(priceCell);
 
-    const totalCell = document.createElement("td");
-    totalCell.textContent = `$${itemTotalPrice}`;
-    tr.appendChild(totalCell);
+      const totalCell = document.createElement("td");
+      totalCell.textContent = `$${itemTotalPrice}`;
+      tr.appendChild(totalCell);
 
-    const actionsCell = document.createElement("td");
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-    deleteButton.classList.add("btn", "btn-danger", "delete-product");
-    deleteButton.setAttribute("data-product-id", productId);
-    deleteButton.addEventListener("click", () => {
-      delete cart[productId];
-      updateCartDisplay();
-    });
-    actionsCell.appendChild(deleteButton);
-    tr.appendChild(actionsCell);
+      const actionsCell = document.createElement("td");
+      const deleteButton = document.createElement("button");
+      deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+      deleteButton.classList.add("btn", "btn-danger", "delete-product");
+      deleteButton.setAttribute("data-product-id", productId);
+      deleteButton.setAttribute("data-sweetness-level", sweetnessLevel);
+      deleteButton.addEventListener("click", () => {
+        delete cart[productId][sweetnessLevel];
+        if (Object.keys(cart[productId]).length === 0) {
+          delete cart[productId];
+        }
+        updateCartDisplay();
+      });
+      actionsCell.appendChild(deleteButton);
+      tr.appendChild(actionsCell);
 
-    tbody.appendChild(tr);
+      tbody.appendChild(tr);
+    }
   }
 
   table.appendChild(tbody);
@@ -152,13 +173,14 @@ function generateCartReceipt() {
       </style>
       <p>SUAN NAI KOON - Cafe&Food!</p>
       <h2>Cart Receipt</h2>
+      <p>Order Date: ${new Date().toLocaleString()}</p> <!-- เพิ่มเวลาและวันที่ที่ทำการสั่งซื้อ -->
       <table>
         <thead>
           <tr>
             <th>Product</th>
+            <th>Sweetness</th>
             <th>Quantity</th>
             <th>Price</th>
-            <th>Sweetness</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -168,19 +190,21 @@ function generateCartReceipt() {
 
   // ลูปผ่านสินค้าใน cart และเพิ่มข้อมูลในใบเสร็จ
   for (const productId in cart) {
-    const item = cart[productId];
-    const itemTotalPrice = item.quantity * item.price;
+    for (const sweetnessLevel in cart[productId]) {
+      const item = cart[productId][sweetnessLevel];
+      const itemTotalPrice = item.quantity * item.price;
 
-    receiptContent += `
+      receiptContent += `
         <tr>
           <td>${productId}</td>
+          <td>${item.sweetnessLevel}</td> <!-- แสดงระดับความหวาน -->
           <td>${item.quantity}</td>
           <td>$${item.price}</td>
-          <td>${item.sweetnessLevel}</td> <!-- แสดงระดับความหวาน -->
           <td>$${itemTotalPrice}</td>
         </tr>`;
 
-    totalPrice += itemTotalPrice;
+      totalPrice += itemTotalPrice;
+    }
   }
 
   // เพิ่มราคาทั้งหมด
@@ -188,7 +212,8 @@ function generateCartReceipt() {
         </tbody>
       </table>
       <p>Total Price: $${totalPrice}</p>
-      <p>คุณ Kays Tel.088-888-8888</p>
+      <p>Tel: 084-169-1659</p>
+      <p>Address: หลังอบต.ดอนพุทรา</p>
       `;
 
   return receiptContent;
